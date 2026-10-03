@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0c0a09; /* stone-950 */
+  --color-foreground: #f5f5f4; /* stone-100 */
+  --color-primary: #d97706; /* amber-600 */
+  --color-primary-foreground: #0c0a09;
+  --color-secondary: #1c1917; /* stone-900 */
+  --color-secondary-foreground: #f5f5f4;
+  --color-muted: #292524; /* stone-800 */
+  --color-muted-foreground: #a8a29e; /* stone-400 */
+  --color-accent: #292524;
+  --color-accent-foreground: #f5f5f4;
+  --color-border: #292524;
+  --color-input: #292524;
+  --color-ring: #d97706;
+}
+
+/* ========================================================================= */
+/* ULTRA-LUXURY SMOOTH SCROLLING & HARDWARE ACCELERATION                     */
+/* ========================================================================= */
+:root {
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-fluid: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-bounce-soft: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Ensure any modal/sheet content scrolls independently without Lenis interference */
+.lenis.lenis-smooth [data-lenis-prevent],
+[data-lenis-prevent] {
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+}
+
+.lenis.lenis-stopped {
+  /* Prevent iframe clipping and scroll resetting */
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+@layer base {
+  *, ::before, ::after {
+    border-color: #292524;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+  }
+
+  body {
+    background-color: #0c0a09;
+    color: #f5f5f4;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Custom Luxury Noir & Gold Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0c0a09;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #292524;
+    border-radius: 9999px;
+    border: 1px solid rgba(217, 119, 6, 0.25);
+    transition: background-color 0.25s var(--ease-luxury), border-color 0.25s var(--ease-luxury);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d97706;
+    border-color: #f59e0b;
+  }
+
+  /* Layout shift (CLS) prevention for images & media */
+  img, video {
+    max-width: 100%;
+    height: auto;
+    content-visibility: auto;
+  }
+}
+
+/* ========================================================================= */
+/* GPU ACCELERATION & ZERO-LAG TRANSITION UTILITIES                          */
+/* ========================================================================= */
+.gpu-accelerated,
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
+}
+
+/* Luxury hover transition with zero frame drops */
+.luxury-transition {
+  transition-property: transform, opacity, background-color, border-color, box-shadow, color;
+  transition-duration: 350ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-transition-fast {
+  transition-property: transform, opacity, background-color, border-color, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth Interactive Cards */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px) translateZ(0);
+}
+
+/* Hide scrollbars for clean carousel/ribbon navigation */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Shimmer Light Sweep for Buttons and Cards */
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-15deg);
+  }
+}
+
+.animate-shimmer-sweep {
+  animation: shimmer-sweep 2.8s infinite ease-in-out;
+  will-change: transform;
+}
+
+/* Reveal-on-scroll Smooth Keyframes */
+@keyframes luxuryRevealUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.animate-reveal-up {
+  animation: luxuryRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Mobile Safe-Area padding */
+.pb-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
